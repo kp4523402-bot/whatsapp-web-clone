@@ -1,0 +1,350 @@
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+body.dark { background: #111b21; color: #e9edef; }
+body.light { background: #f0f2f5; color: #111b21; }
+
+.login-wrapper { display: flex; height: 100vh; align-items: center; justify-content: center; }
+.login-card { background: #202c33; padding: 30px; border-radius: 10px; width: 340px; text-align: center; }
+.login-card input, .modal-content input, .modal-content select {
+    width: 100%; padding: 10px; margin: 8px 0; border-radius: 6px; border: 1px solid #3b4a54; background: #2a3942; color: #fff;
+}
+button { padding: 9px 14px; background: #00a884; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: 600; }
+.otp-banner { background: #182229; padding: 8px; border-radius: 5px; color: #00a884; font-weight: bold; }
+
+.app-container { display: flex; height: 100vh; width: 100vw; }
+.sidebar { width: 32%; border-right: 1px solid #2f3b43; display: flex; flex-direction: column; background: #111b21; }
+body.light .sidebar { background: #ffffff; border-color: #d1d7db; }
+.sidebar-header, .chat-header {
+    height: 60px; background: #202c33; display: flex; align-items: center; justify-content: space-between; padding: 0 15px;
+}
+body.light .sidebar-header, body.light .chat-header { background: #f0f2f5; }
+.dp-img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; cursor: pointer; }
+.header-actions button, .chat-actions button { background: transparent; font-size: 18px; padding: 5px 8px; }
+
+.search-box { padding: 8px 12px; background: #111b21; }
+.search-box input { width: 100%; padding: 8px 12px; border-radius: 8px; border: none; background: #202c33; color: #fff; }
+
+.chat-list { flex: 1; overflow-y: auto; }
+.chat-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 15px; border-bottom: 1px solid #202c33; cursor: pointer;
+}
+.chat-item:hover { background: #202c33; }
+body.light .chat-item:hover { background: #f5f6f6; }
+
+.chat-area { flex: 1; display: flex; flex-direction: column; background: #0b141a; }
+body.light .chat-area { background: #efeae2; }
+.messages-box { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+.msg { max-width: 65%; padding: 8px 12px; border-radius: 8px; position: relative; font-size: 14px; }
+.msg.sent { align-self: flex-end; background: #005c4b; color: #fff; }
+.msg.received { align-self: flex-start; background: #202c33; color: #e9edef; }
+body.light .msg.received { background: #ffffff; color: #111; }
+.del-btn { font-size: 11px; color: #ff8a8a; margin-left: 8px; cursor: pointer; }
+
+.chat-footer { height: 62px; background: #202c33; display: flex; align-items: center; padding: 0 12px; gap: 10px; }
+.chat-footer input[type="text"] { flex: 1; padding: 10px; border-radius: 8px; border: none; background: #2a3942; color: #fff; }
+.file-btn { cursor: pointer; font-size: 20px; padding: 6px; }
+.emoji-bar { background: #202c33; padding: 8px 15px; display: flex; gap: 12px; font-size: 22px; cursor: pointer; }
+
+.modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); align-items: center; justify-content: center; z-index: 100; }
+.modal-content { background: #202c33; padding: 22px; border-radius: 10px; width: 360px; display: flex; flex-direction: column; gap: 10px; }
+.close-btn { background: #3b4a54; }
+.status-feed { max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+.status-card { background: #111b21; padding: 8px; border-radius: 6px; }
+/* WhatsApp Brand Title */
+.sidebar-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background-color: #111b21;
+}
+
+.wa-brand-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #25d366;
+    letter-spacing: -0.3px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Chat Filter Pills (All, Unread, Groups, Channels) */
+.search-filter-wrapper {
+    background-color: #111b21;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #202c33;
+}
+
+.chat-filter-pills {
+    display: flex;
+    gap: 8px;
+    padding: 6px 16px 4px 16px;
+    overflow-x: auto;
+}
+
+.filter-pill {
+    background: #202c33;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    color: #8696a0;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s all ease;
+}
+
+.filter-pill:hover {
+    background: #2a3942;
+    color: #d1d7db;
+}
+
+.filter-pill.active {
+    background: #00a884;
+    color: #111b21;
+    font-weight: 600;
+}
+
+/* Dropdown Menu (Clear Chat, Block, Settings) */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background: #233138;
+    min-width: 160px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border-radius: 8px;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #d1d7db;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    transition: 0.2s background;
+}
+
+.dropdown-content a:hover {
+    background: #182229;
+    color: #25d366;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+/* 3 Dots Menu Pop-up Fix */
+.dropdown {
+    position: relative !important;
+    display: inline-block !important;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute !important;
+    right: 0 !important;
+    top: 35px !important;
+    background-color: #233138 !important;
+    min-width: 170px !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6) !important;
+    border-radius: 8px !important;
+    z-index: 9999 !important;
+}
+
+.dropdown-content.show {
+    display: block !important;
+}
+
+.dropdown-content a {
+    color: #e9edef !important;
+    padding: 10px 16px !important;
+    text-decoration: none !important;
+    display: block !important;
+    font-size: 14px !important;
+}
+
+.dropdown-content a:hover {
+    background-color: #182229 !important;
+}
+
+/* Chat Media Images Display Fix */
+.chat-media-img {
+    max-width: 250px;
+    max-height: 250px;
+    border-radius: 8px;
+    margin-top: 5px;
+    cursor: pointer;
+    display: block;
+}
+
+.chat-media-video {
+    max-width: 260px;
+    border-radius: 8px;
+    margin-top: 5px;
+    display: block;
+}
+/* ==========================================
+   WHATSAPP LIGHT MODE THEME OVERRIDES
+   ========================================== */
+body.light {
+    background-color: #eae6df !important;
+    color: #111b21 !important;
+}
+
+body.light .app-container {
+    background-color: #f0f2f5 !important;
+}
+
+body.light .sidebar,
+body.light .sidebar-header-top,
+body.light .user-profile-bar,
+body.light .search-filter-wrapper {
+    background-color: #ffffff !important;
+    border-color: #e9edef !important;
+}
+
+body.light .wa-brand-title {
+    color: #008069 !important;
+}
+
+body.light #search-input {
+    background-color: #f0f2f5 !important;
+    color: #111b21 !important;
+}
+
+body.light .filter-pill {
+    background-color: #f0f2f5 !important;
+    color: #54656f !important;
+}
+
+body.light .filter-pill.active {
+    background-color: #d9fdd3 !important;
+    color: #008069 !important;
+}
+
+body.light .chat-item {
+    border-bottom-color: #f0f2f5 !important;
+}
+
+body.light .chat-item:hover {
+    background-color: #f5f6f6 !important;
+}
+
+body.light .chat-item strong {
+    color: #111b21 !important;
+}
+
+body.light .chat-area {
+    background-color: #efeae2 !important;
+}
+
+body.light .chat-header {
+    background-color: #f0f2f5 !important;
+    border-bottom: 1px solid #d1d7db !important;
+}
+
+body.light #active-chat-name {
+    color: #111b21 !important;
+}
+
+body.light .chat-footer {
+    background-color: #f0f2f5 !important;
+}
+
+body.light #msg-input {
+    background-color: #ffffff !important;
+    color: #111b21 !important;
+    border: 1px solid #e9edef !important;
+}
+
+/* Messages Bubbles in Light Mode */
+body.light .msg.sent {
+    background-color: #d9fdd3 !important;
+    color: #111b21 !important;
+}
+
+body.light .msg.received {
+    background-color: #ffffff !important;
+    color: #111b21 !important;
+}
+
+/* Modals & Dropdown */
+body.light .modal-content,
+body.light .dropdown-content {
+    background-color: #ffffff !important;
+    color: #111b21 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+}
+
+body.light .modal-content h3,
+body.light .modal-content label,
+body.light .modal-content span {
+    color: #111b21 !important;
+}
+
+body.light .dropdown-content a {
+    color: #111b21 !important;
+}
+
+body.light .dropdown-content a:hover {
+    background-color: #f5f6f6 !important;
+}
+/* ========================================================
+   WhatsApp Official Doodle Wallpaper Background
+   ======================================================== */
+
+/* डार्क मोडमधील डूडल बॅकग्राउंड */
+.messages-box, #messages-box {
+    background-color: #0b141a !important;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png') !important;
+    background-repeat: repeat !important;
+    background-size: 400px !important;
+    background-blend-mode: overlay;
+}
+
+/* लाइट मोडमधील डूडल बॅकग्राउंड (दुसऱ्या स्क्रीनशॉटप्रमाणे) */
+body.light .messages-box,
+body.light #messages-box,
+body.light .chat-area {
+    background-color: #efeae2 !important;
+    background-image: url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png') !important;
+    background-repeat: repeat !important;
+    background-size: 420px !important;
+    opacity: 0.98;
+}
+/* ========================================================
+   WhatsApp Custom Offline Background (Dark & Light Mode)
+   ======================================================== */
+
+/* डार्क मोडसाठी (Default Dark Mode) */
+.messages-box, #messages-box {
+    background-color: #0b141a !important;
+    background-image: url('/static/whatsapp_bk_image.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: 380px !important;
+    background-blend-mode: overlay;
+}
+
+/* लाइट मोडसाठी (Light Mode) */
+body.light .messages-box,
+body.light #messages-box,
+body.light .chat-area {
+    background-color: #efeae2 !important;
+    background-image: url('/static/whatsapp_bk_image.jpg') !important;
+    background-repeat: repeat !important;
+    background-size: 380px !important;
+    background-blend-mode: multiply;
+}
